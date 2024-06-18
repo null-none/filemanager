@@ -1,4 +1,4 @@
-module github.com/null-none/qr-tours.com
+module github.com/null-none/qr-tours
 
 go 1.18
 
