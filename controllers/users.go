@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/null-none/gr-tours/models"
+	"github.com/null-none/qr-tours/models"
 )
 
 // GET /users

@@ -1,11 +1,12 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 	"path/filepath"
-	"fmt"
+
 	"github.com/gin-gonic/gin"
-	"github.com/null-none/gr-tours/models"
+	"github.com/null-none/qr-tours/models"
 )
 
 // POST /photos
@@ -13,7 +14,7 @@ import (
 func CreatePhoto(c *gin.Context) {
 
 	type PhotoInput struct {
-		Tour         int `json:"tour"`
+		Tour int `json:"tour"`
 	}
 
 	var input PhotoInput
