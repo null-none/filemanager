@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/null-none/qr-tours/models"
@@ -23,7 +24,12 @@ func CreatePhoto(c *gin.Context) {
 		return
 	}
 
-	tour := c.PostForm("tour")
+	tourStr := c.PostForm("tour")
+	tour, err := strconv.Atoi(tourStr)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid tour value"})
+		return
+	}
 
 	form, err := c.MultipartForm()
 	if err != nil {
