@@ -1,8 +1,8 @@
 package models
 
-type Tour struct {
+type Folder struct {
   ID            uint   `json:"id" gorm:"primary_key"`
-  Day           string `json:"day"`
+  Prefix        string `json:"prefix"`
   Title         string `json:"title"`
   Description   string `json:"description"`
 }

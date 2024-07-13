@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/null-none/qr-tours/controllers"
-	"github.com/null-none/qr-tours/models"
+	"github.com/null-none/filemanager/controllers"
+	"github.com/null-none/filemanager/models"
 )
 
 func main() {
@@ -13,6 +13,7 @@ func main() {
 	models.ConnectDatabase()
 
 	r.GET("/users", controllers.FindUsers)
+	r.GET("/users/:id", controllers.FindUser)
 	r.GET("/tours", controllers.FindTours)
 	r.POST("/photos", controllers.CreatePhoto)
 

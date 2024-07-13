@@ -7,27 +7,27 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/null-none/qr-tours/models"
+	"github.com/null-none/filemanager/models"
 )
 
-// POST /photos
-// Create photos
-func CreatePhoto(c *gin.Context) {
+// POST /files
+// Create files
+func CreateFile(c *gin.Context) {
 
-	type PhotoInput struct {
-		Tour int `json:"tour"`
+	type FileInput struct {
+		Folder int `json:"folder"`
 	}
 
-	var input PhotoInput
+	var input FileInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	tourStr := c.PostForm("tour")
-	tour, err := strconv.Atoi(tourStr)
+	folderStr := c.PostForm("folder")
+	folder, err := strconv.Atoi(folderStr)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid tour value"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid folder value"})
 		return
 	}
 
@@ -44,8 +44,8 @@ func CreatePhoto(c *gin.Context) {
 			c.String(http.StatusBadRequest, "upload file err: %s", err.Error())
 			return
 		}
-		photo := models.Photo{Name: filename, Path: fmt.Sprintf("/photos/%s", filename), Tour: tour}
-		models.DB.Create(&photo)
+		file := models.File{Name: filename, Path: fmt.Sprintf("/files/%s", filename), Tour: tour}
+		models.DB.Create(&file)
 	}
 
 	c.String(http.StatusOK, "Uploaded successfully %d files.", len(files))
