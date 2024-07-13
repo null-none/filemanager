@@ -1,11 +1,9 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/null-none/filemanager/middlewares"
 	"github.com/null-none/filemanager/models"
 )
 
@@ -31,10 +29,10 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	tokenString, err := middlewares.CreateToken(user.Phone)
+	token, err := createToken(user.Phone)
 	if err != nil {
-		fmt.Errorf(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err})
 	}
 
-	c.JSON(http.StatusOK, gin.H{"data": user, "token": tokenString})
+	c.JSON(http.StatusOK, gin.H{"data": user, "token": token})
 }
