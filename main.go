@@ -14,7 +14,7 @@ func main() {
 
 	r.GET("/users", controllers.FindUsers)
 	r.GET("/users/:id", controllers.FindUser)
-	r.GET("/tours", controllers.FindTours)
+	r.GET("/folder", controllers.FindFolders)
 	r.POST("/files", controllers.CreateFile)
 
 	r.MaxMultipartMemory = 8 << 20 // 8 MiB

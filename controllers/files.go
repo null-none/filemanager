@@ -44,7 +44,7 @@ func CreateFile(c *gin.Context) {
 			c.String(http.StatusBadRequest, "upload file err: %s", err.Error())
 			return
 		}
-		file := models.File{Name: filename, Path: fmt.Sprintf("/data/%s", filename), Tour: tour}
+		file := models.File{Name: filename, Path: fmt.Sprintf("/data/%s", filename), Folder: folder}
 		models.DB.Create(&file)
 	}
 
