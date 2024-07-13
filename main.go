@@ -15,10 +15,10 @@ func main() {
 	r.GET("/users", controllers.FindUsers)
 	r.GET("/users/:id", controllers.FindUser)
 	r.GET("/tours", controllers.FindTours)
-	r.POST("/photos", controllers.CreatePhoto)
+	r.POST("/files", controllers.CreateFile)
 
 	r.MaxMultipartMemory = 8 << 20 // 8 MiB
-	r.Static("/files", "./files")
+	r.Static("/data", "./data")
 
 	r.Run()
 }

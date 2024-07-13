@@ -8,6 +8,8 @@ RUN CGO_ENABLED=0
 
 COPY go.mod go.sum ./
 
+RUN go get github.com/golang-jwt/jwt/v5
+
 RUN go mod download
 
 COPY . .
