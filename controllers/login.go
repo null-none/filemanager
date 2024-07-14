@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/null-none/filemanager/utils"
 	"github.com/null-none/filemanager/models"
 )
 
@@ -30,7 +31,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	token, err := createToken(user.Login)
+	token, err := token.createToken(user.Login)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Authorization error, please try again later."})
 	}

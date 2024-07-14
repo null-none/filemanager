@@ -8,22 +8,16 @@ import (
 )
 
 func main() {
-	r := gin.Default()
+	router:= gin.Default()
 
 	models.ConnectDatabase()
-	r.POST("/login", controllers.Login)
+	router.POST("/login", controllers.Login)
 
-	api := r.Group("/api")
-    api.Use(authMiddleware())
-    {
-		r.GET("/users", controllers.FindUsers)
-		r.GET("/users/:id", controllers.FindUser)
-		r.GET("/folder", controllers.FindFolders)
-		r.POST("/files", controllers.CreateFile)
+	router.GET("/folders", middleware.authMiddleware(), controllers.FindFolders)
+	router.GET("/folders/:id", middleware.authMiddleware(), controllers.FindFolder)
 	
-		r.MaxMultipartMemory = 8 << 20 // 8 MiB
-		r.Static("/data", "./data")
-    }
+	router.MaxMultipartMemory = 8 << 20 // 8 MiB
+	router.Static("/data", "./data")
 
-	r.Run()
+	router.Run()
 }
