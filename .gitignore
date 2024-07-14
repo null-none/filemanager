@@ -3,3 +3,5 @@ files
 www
 .DS_Store
 *.DS_Store
+.clj-kondo
+.lsp

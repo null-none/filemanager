@@ -3,7 +3,9 @@ package controllers
 import (
 	"fmt"
 	"time"
+    "net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -38,4 +40,23 @@ func verifyToken(tokenString string) error {
 	}
 
 	return nil
+}
+
+
+func authMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        tokenString := c.GetHeader("Authorization")
+        if tokenString == "" {
+            c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization header missing"})
+            return
+        }
+
+		err := verifyToken(tokenString)
+		
+		if err != nil {
+            c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+		}
+
+        c.Next()
+    }
 }

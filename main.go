@@ -11,14 +11,19 @@ func main() {
 	r := gin.Default()
 
 	models.ConnectDatabase()
+	r.POST("/login", controllers.Login)
 
-	r.GET("/users", controllers.FindUsers)
-	r.GET("/users/:id", controllers.FindUser)
-	r.GET("/folder", controllers.FindFolders)
-	r.POST("/files", controllers.CreateFile)
-
-	r.MaxMultipartMemory = 8 << 20 // 8 MiB
-	r.Static("/data", "./data")
+	api := r.Group("/api")
+    api.Use(authMiddleware())
+    {
+		r.GET("/users", controllers.FindUsers)
+		r.GET("/users/:id", controllers.FindUser)
+		r.GET("/folder", controllers.FindFolders)
+		r.POST("/files", controllers.CreateFile)
+	
+		r.MaxMultipartMemory = 8 << 20 // 8 MiB
+		r.Static("/data", "./data")
+    }
 
 	r.Run()
 }
