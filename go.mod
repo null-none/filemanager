@@ -1,11 +1,11 @@
 module github.com/null-none/filemanager
 
 go 1.22.5
-toolchain go1.23.7
+toolchain go1.24.1
 
 require (
 	github.com/gin-gonic/gin v1.10.0
-	github.com/golang-jwt/jwt/v5 v5.2.1
+	github.com/golang-jwt/jwt/v5 v5.2.2
 	gorm.io/driver/sqlite v1.5.6
 	gorm.io/gorm v1.25.11
 )
